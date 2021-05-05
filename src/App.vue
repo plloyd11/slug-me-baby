@@ -1,6 +1,15 @@
 <template>
     <main class="flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
-        <Toast v-show="slugged" :formattedSlug="formattedSlug" />
+        <transition
+            enter-active-class="transition duration-300 ease-out transform"
+            enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+            leave-active-class="transition duration-100 ease-in"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+        >
+            <Toast v-show="slugged" :formattedSlug="formattedSlug" @closeToast="closeToast" />
+        </transition>
 
         <div class="sm:mx-auto sm:w-full sm:max-w-lg">
             <img src="./assets/slug.png" alt="Slug on a computer" class="mx-auto" />
@@ -97,6 +106,7 @@ export default {
                 .normalize('NFD')
                 .replace(/[\u0300-\u036f]/g, '')
                 .replace(/\s+/g, '-')
+                .replace(/_/g, '-')
                 .toLowerCase()
                 .replace(/&/g, '-and-')
                 .replace(/[^a-z0-9-]/g, '')
@@ -119,6 +129,9 @@ export default {
         resetInput() {
             this.slug = ''
             this.formattedSlug = ''
+            this.slugged = false
+        },
+        closeToast() {
             this.slugged = false
         },
     },

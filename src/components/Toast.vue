@@ -3,37 +3,23 @@
         class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"
     >
         <div
-            class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5"
+            class="w-full max-w-md overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5"
         >
             <div class="p-4">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
-                        <!-- Heroicon name: outline/check-circle -->
-                        <svg
-                            class="w-6 h-6 text-green-400"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                        </svg>
+                        <img src="/public/pm.png" alt="Prisoner Mike" class="w-16 rounded-full" />
                     </div>
                     <div class="ml-3 w-0 flex-1 pt-0.5">
-                        <p class="text-sm font-medium text-gray-800">You got slugged!</p>
-                        <p class="mt-1 text-sm text-gray-500">
+                        <p class="text-xl font-medium text-gray-800">You got Mikey Slugged!</p>
+                        <p class="mt-1 text-base text-gray-600">
                             '{{ formattedSlug }}' was copied to your clipboard
                         </p>
                     </div>
                     <div class="flex flex-shrink-0 ml-4">
                         <button
-                            class="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            @click="closeToast"
+                            class="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                         >
                             <span class="sr-only">Close</span>
 
@@ -63,6 +49,11 @@ export default {
     props: {
         formattedSlug: {
             type: String,
+        },
+    },
+    methods: {
+        closeToast() {
+            this.$emit('closeToast')
         },
     },
 }
